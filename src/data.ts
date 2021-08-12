@@ -3,7 +3,7 @@ export const permissions = [
     category: "CXM",
     description: "Remove assigned associates from a Relationship",
     active: true,
-    inherited: false
+    inherited: true
   },
   {
     category: "CXM",
