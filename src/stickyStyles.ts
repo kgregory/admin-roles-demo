@@ -5,12 +5,13 @@ const stickyStyles = (
   {
     sticky = true,
     backgroundColor = theme.palette.background.paper,
-    stuckToolbars = 1
+    stuckToolbars = 1,
+    zIndex = 11
   } = {}
 ) => {
   return sticky
     ? {
-        zIndex: 11,
+        zIndex,
         position: "sticky",
         backgroundColor,
         ...toolbarRelativeStyles(

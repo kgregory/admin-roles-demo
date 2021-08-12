@@ -67,6 +67,7 @@ export default function RoleDetails({ onChangeView }) {
           <Grid item xs={12} md={8} className={classes.section}>
             <PermissionsUsersCard
               userGroup={userGroup}
+              roleState={roleState}
               onUserClick={() => onChangeView("userdetails")}
             />
           </Grid>

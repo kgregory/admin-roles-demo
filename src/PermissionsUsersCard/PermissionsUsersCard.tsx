@@ -24,7 +24,7 @@ const useEditableTabs = () => {
   );
 };
 
-const PermissionsUsersCard = ({ userGroup, onUserClick }) => {
+const PermissionsUsersCard = ({ userGroup, roleState, onUserClick }) => {
   const {
     value,
     onChange,
@@ -52,6 +52,7 @@ const PermissionsUsersCard = ({ userGroup, onUserClick }) => {
           isEditing={isEditingUsers}
           onToggleEdit={onToggleEditUsers}
           onUserClick={onUserClick}
+          roleState={roleState}
         />
       ) : null}
       {value === 0 ? (
