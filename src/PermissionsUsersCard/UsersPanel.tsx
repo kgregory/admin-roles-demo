@@ -15,9 +15,9 @@ import ConfirmationDialog from "../ConfirmationDialog";
 import useConfirmationDialog from "../useConfirmationDialog";
 import stickyStyles from "../stickyStyles";
 import useDialog from "../useDialog";
+import { users } from "../data";
 import AddUserToRole from "./AddUserToRole";
 import getFullName from "./getFullName";
-import { users } from "./data";
 
 const useStyles = makeStyles((theme) => ({
   grow: {

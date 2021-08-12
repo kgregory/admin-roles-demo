@@ -7,8 +7,8 @@ import Autocomplete, {
   createFilterOptions
 } from "@material-ui/lab/Autocomplete";
 import ResponsiveEditDialog from "../ResponsiveEditDialog";
+import { users } from "../data";
 import getFullName from "./getFullName";
-import { users } from "./data";
 
 interface AddUserToRoleProps {
   roleState: "initial" | "loading" | "error";

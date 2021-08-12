@@ -11,7 +11,7 @@ import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ConfirmationDialog from "../ConfirmationDialog";
 import useConfirmationDialog from "../useConfirmationDialog";
-import { roles } from "./data";
+import { roles } from "../data";
 
 const useStyles = makeStyles((theme) => ({
   grow: {

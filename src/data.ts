@@ -1,27 +1,3 @@
-export const users = [
-  { name: { first: "Ken", last: "Gregory" }, email: "kjg@gmail.com" },
-  {
-    name: { first: "Bob", last: "Quigley" },
-    email: "robertquigleysemimanager@gmail.com"
-  },
-  {
-    name: { first: "Matt", last: "Damaskowski" },
-    email: "mattydapunisher1999@gmail.com"
-  },
-  {
-    name: { first: "Wolfgang", last: "Traumlisch" },
-    email: "wolfgang@gmail.com"
-  },
-  {
-    name: { first: "Snarl", last: "Boddington" },
-    email: "iamnotbobquigley@aol.com"
-  },
-  {
-    name: { first: "Johnny", last: "Boombohnny" },
-    email: "johnnyboomz@yahoo.com"
-  }
-];
-
 export const permissions = [
   {
     category: "CXM",
@@ -73,10 +49,36 @@ export const permissions = [
   }
 ];
 
-export const inheritedPermissions = [
-  { description: "Override cart line price", active: true },
+export const roles = [
+  { description: "Workspace Administrator" },
+  { description: "Manager" },
+  { description: "Sales Associate" },
   {
-    description: "Play Gilligans_Island.midi when Checkout is initiated",
-    active: true
+    description:
+      "Semi-Manager (ONLY ASSIGN TO BOB QUIGLEY OR YOU WILL BE FIRED)"
+  }
+];
+
+export const users = [
+  { name: { first: "Ken", last: "Gregory" }, email: "kjg@gmail.com" },
+  {
+    name: { first: "Bob", last: "Quigley" },
+    email: "robertquigleysemimanager@gmail.com"
+  },
+  {
+    name: { first: "Matt", last: "Damaskowski" },
+    email: "mattydapunisher1999@gmail.com"
+  },
+  {
+    name: { first: "Wolfgang", last: "Traumlisch" },
+    email: "wolfgang@gmail.com"
+  },
+  {
+    name: { first: "Snarl", last: "Boddington" },
+    email: "iamnotbobquigley@aol.com"
+  },
+  {
+    name: { first: "Johnny", last: "Boombohnny" },
+    email: "johnnyboomz@yahoo.com"
   }
 ];
