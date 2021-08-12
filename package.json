@@ -1,0 +1,29 @@
+{
+  "title": "Material demo",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "main": "index.tsx",
+  "devDependencies": {
+    "react-scripts": "latest"
+  },
+  "description": "Initially based on: https://github.com/mui-org/material-ui/blob/master/docs/src/pages/components/tabs/IconTabs.tsx",
+  "dependencies": {
+    "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
+    "@material-ui/lab": "4.0.0-alpha.60",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "clsx": "1.1.1",
+    "date-fns": "2.23.0",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest"
+  },
+  "keywords": [],
+  "name": "admin-app-user-details",
+  "version": "0.0.625"
+}
