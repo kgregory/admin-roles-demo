@@ -58,7 +58,7 @@ export default function RoleDetails({ onChangeView }) {
               onClick={roleNameDialog.onOpen}
             />
             <CardEditor
-              label="User Group"
+              label="STORIS User Group"
               value={userGroup}
               onClick={userGroupDialog.onOpen}
             />

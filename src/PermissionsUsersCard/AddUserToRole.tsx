@@ -17,7 +17,7 @@ interface AddUserToRoleProps {
   onOpen: () => void;
 }
 
-const filterOptions = createFilterOptions<{ name: string; email: string }>({
+const filterOptions = createFilterOptions<typeof users[0]>({
   stringify: (option) => `${option.name}${option?.email}`
 });
 
@@ -42,7 +42,7 @@ export default function AddUserToRole({
         <DialogContentText>
           To find a user, search by name or email address.
         </DialogContentText>
-        <Autocomplete<{ name: string; email: string }>
+        <Autocomplete<typeof users[0]>
           autoHighlight
           multiple
           filterSelectedOptions

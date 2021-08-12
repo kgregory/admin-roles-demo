@@ -6,8 +6,11 @@ import AdminAppBar from "../AdminAppBar";
 import CardEditor from "../CardEditor";
 import RolesPermissionsCard from "../RolesPermissionsCard";
 import toolbarRelativeStyles from "../toolbarRelativeStyles";
+import useDialog from "../useDialog";
+import { users } from "../data";
 import ContactCard from "./ContactCard";
 import DeactivateButton from "./DeactivateButton";
+import EditUserId from "./EditUserId";
 
 const useStyles = makeStyles((theme) => ({
   // this is what our theme usually uses
@@ -39,12 +42,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UserDetails({ onChangeView }) {
   const classes = useStyles();
-  const user = {
-    name: { first: "Ken", last: "Gregory" },
-    email: "kjg@storis.com",
-    createdAt: new Date("1980-07-25T23:50:00").toISOString(),
-    lastActivity: new Date().toISOString()
-  };
+  const userIdDialog = useDialog();
+  const userState: "initial" | "loading" | "error" = "initial";
+  const [user] = users;
   return (
     <div className={classes.root}>
       <AdminAppBar>User Details</AdminAppBar>
@@ -52,16 +52,22 @@ export default function UserDetails({ onChangeView }) {
         <Grid spacing={2} container className={classes.section}>
           <Grid item xs={12} md={4} className={classes.section}>
             <ContactCard {...user} />
-            <CardEditor label="STORIS User ID" value="KJG" />
+            <CardEditor
+              label="STORIS User ID"
+              value={user.userId}
+              onClick={userIdDialog.onOpen}
+            />
             <DeactivateButton />
           </Grid>
           <Grid item xs={12} md={8} className={classes.section}>
             <RolesPermissionsCard
               onRoleClick={() => onChangeView("roledetails")}
+              userState={userState}
             />
           </Grid>
         </Grid>
       </Container>
+      <EditUserId {...{ ...userIdDialog, userState, userId: user.userId }} />
     </div>
   );
 }

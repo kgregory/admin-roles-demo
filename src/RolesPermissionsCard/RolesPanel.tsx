@@ -11,6 +11,8 @@ import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ConfirmationDialog from "../ConfirmationDialog";
 import useConfirmationDialog from "../useConfirmationDialog";
+import useDialog from "../useDialog";
+import AddRoleToUser from "./AddRoleToUser";
 import { roles } from "../data";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const RolesPanel = ({ onRoleClick }) => {
+const RolesPanel = ({ onRoleClick, userState }) => {
   const classes = useStyles();
   const confirmationDialog = useConfirmationDialog(() => {});
   const sortedRoles = React.useMemo(
@@ -39,7 +41,9 @@ const RolesPanel = ({ onRoleClick }) => {
     []
   );
 
-  const handleAddRole = () => {};
+  const addRoleToUserDialog = useDialog();
+
+  const handleAddRole = () => addRoleToUserDialog.onOpen();
 
   return (
     <div role="tabpanel">
@@ -71,6 +75,7 @@ const RolesPanel = ({ onRoleClick }) => {
         onNegative={confirmationDialog.onNegative}
         onAffirmative={confirmationDialog.onAffirmative}
       />
+      <AddRoleToUser {...{ ...addRoleToUserDialog, userState }} />
     </div>
   );
 };

@@ -1,56 +1,54 @@
 import React from "react";
 import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import ResponsiveEditDialog from "../ResponsiveEditDialog";
-import { userGroups } from "../data";
+import { roles } from "../data";
 
-interface EditRoleNameProps {
-  userGroup: string;
-  roleState: "initial" | "loading" | "error";
+interface AddRoleToUserProps {
+  userState: "initial" | "loading" | "error";
   open: boolean;
   onClose: () => void;
   onOpen: () => void;
 }
 
-export default function EditUserGroup({
-  userGroup,
-  roleState,
+export default function AddRoleToUser({
+  userState,
   open,
   onClose,
   onOpen
-}: EditRoleNameProps) {
-  const value = userGroups.find(({ description }) => description === userGroup);
+}: AddRoleToUserProps) {
   return (
     <ResponsiveEditDialog
-      labelId="edit-user-group"
-      title="Edit STORIS User Group"
+      labelId="add-role-to-user"
+      title="Add Role to User"
       open={open}
       onClose={onClose}
-      closeButtonDisabled={roleState === "loading"}
+      closeButtonDisabled={userState === "loading"}
       confirmButtonText="Save"
-      confirmButtonDisabled={roleState === "loading"}
-      isProcessing={roleState === "loading"}
+      confirmButtonDisabled={userState === "loading"}
+      isProcessing={userState === "loading"}
     >
       <DialogContent>
+        <DialogContentText>
+          To find a role, search by role name.
+        </DialogContentText>
         <Autocomplete<{ description: string }>
           autoHighlight
           autoSelect
-          disabled={roleState === "loading"}
-          id="edit-user-group-combobox"
-          options={userGroups}
+          disabled={userState === "loading"}
+          id="add-role-to-user-combobox"
+          options={roles}
           getOptionLabel={(option) => option.description}
-          value={roleState === "error" ? "" : value}
           renderInput={(params) => (
             <TextField
               {...params}
               autoFocus
-              error={roleState === "error"}
-              id="edit-user-group-input"
+              error={userState === "error"}
+              id="add-role-to-user-input"
               helperText={
-                roleState === "error"
-                  ? "STORIS User Group is required."
-                  : undefined
+                userState === "error" ? "Role is required." : undefined
               }
               fullWidth
               variant="outlined"

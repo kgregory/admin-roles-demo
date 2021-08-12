@@ -24,7 +24,7 @@ const useEditableTabs = () => {
   );
 };
 
-const RolePermissionsCard = ({ onRoleClick }) => {
+const RolePermissionsCard = ({ onRoleClick, userState }) => {
   const { value, onChange } = useEditableTabs();
 
   return (
@@ -40,7 +40,9 @@ const RolePermissionsCard = ({ onRoleClick }) => {
         <Tab label="Roles" />
         <Tab label="Permissions" />
       </Tabs>
-      {value === 0 ? <RolesPanel onRoleClick={onRoleClick} /> : null}
+      {value === 0 ? (
+        <RolesPanel onRoleClick={onRoleClick} userState={userState} />
+      ) : null}
       {value === 1 ? <PermissionsPanel /> : null}
     </Paper>
   );
