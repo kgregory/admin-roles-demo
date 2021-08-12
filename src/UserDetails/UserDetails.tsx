@@ -2,12 +2,12 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import AdminAppBar from "./AdminAppBar";
+import AdminAppBar from "../AdminAppBar";
+import CardEditor from "../CardEditor";
+import RolesPermissionsCard from "../RolesPermissionsCard";
+import toolbarRelativeStyles from "../toolbarRelativeStyles";
 import ContactCard from "./ContactCard";
-import CardEditor from "./CardEditor";
 import DeactivateButton from "./DeactivateButton";
-import RolesPermissionsCard from "./RolesPermissionsCard";
-import toolbarRelativeStyles from "./toolbarRelativeStyles";
 
 const useStyles = makeStyles((theme) => ({
   // this is what our theme usually uses
