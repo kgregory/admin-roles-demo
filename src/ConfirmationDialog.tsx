@@ -29,6 +29,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   ...other
 }) => (
   <Dialog scroll="body" {...other} aria-labelledby="confirmation-dialog-title">
+    {loading && <LinearProgress />}
     <DialogTitle>
       <span id="confirmation-dialog-title">{dialogTitle}</span>
     </DialogTitle>
@@ -43,7 +44,6 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
         {affirmativeText}
       </Button>
     </DialogActions>
-    {loading && <LinearProgress />}
   </Dialog>
 );
 

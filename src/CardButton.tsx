@@ -10,9 +10,19 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const delay = (waitTime = 0): Promise<unknown> =>
+  new Promise((resolve) => setTimeout(resolve, waitTime));
+
 const CardButton = ({ label, icon, dialogText }) => {
+  const [loading, setLoading] = React.useState(false);
   const classes = useStyles();
   const confirmationDialog = useConfirmationDialog(() => {});
+  const handleAffirmative = async () => {
+    setLoading(true);
+    await delay(2000);
+    setLoading(false);
+    confirmationDialog.onAffirmative();
+  };
   return (
     <>
       <Button
@@ -29,7 +39,8 @@ const CardButton = ({ label, icon, dialogText }) => {
         affirmativeText={label}
         open={confirmationDialog.open}
         onNegative={confirmationDialog.onNegative}
-        onAffirmative={confirmationDialog.onAffirmative}
+        onAffirmative={handleAffirmative}
+        loading={loading}
       />
     </>
   );
