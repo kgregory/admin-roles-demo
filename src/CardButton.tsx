@@ -3,15 +3,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import ConfirmationDialog from "./ConfirmationDialog";
 import useConfirmationDialog from "./useConfirmationDialog";
+import delay from "./delay";
 
 const useStyles = makeStyles((theme) => ({
   button: {
     padding: theme.spacing(2)
   }
 }));
-
-const delay = (waitTime = 0): Promise<unknown> =>
-  new Promise((resolve) => setTimeout(resolve, waitTime));
 
 const CardButton = ({ label, icon, dialogText }) => {
   const [loading, setLoading] = React.useState(false);
