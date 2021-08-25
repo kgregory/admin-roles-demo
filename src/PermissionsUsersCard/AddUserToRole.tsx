@@ -18,7 +18,7 @@ interface AddUserToRoleProps {
 }
 
 const filterOptions = createFilterOptions<typeof users[0]>({
-  stringify: (option) => `${option.name}${option?.email}`
+  stringify: (option) => `${getFullName(option.name)}${option?.email}`
 });
 
 export default function AddUserToRole({
