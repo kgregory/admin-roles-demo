@@ -1,11 +1,11 @@
 import React from "react";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import ListItemText from "@material-ui/core/ListItemText";
 import Autocomplete, {
   createFilterOptions
 } from "@material-ui/lab/Autocomplete";
 import AutocompleteComboboxField from "../AutocompleteComboboxField";
+import DialogContentText from "../DialogContentText";
 import ResponsiveEditDialog from "../ResponsiveEditDialog";
 import useAutocompleteOptionsLoading from "../useAutocompleteOptionsLoading";
 import { users } from "../data";
@@ -28,21 +28,37 @@ export default function AddUserToRole({
   onClose,
   onOpen
 }: AddUserToRoleProps) {
+  /** to see the fetch error state set this to true */
+  const fetchFailed: boolean = false;
+
+  /** to see the mutation error state set this to true */
+  const mutationFailed: boolean = false;
+
   const loading = useAutocompleteOptionsLoading();
-  const disabled = loading || roleState === "loading";
-  const options = loading ? [] : users;
+  const disabled = loading || roleState === "loading" || fetchFailed;
+  const closeButtonDisabled = roleState === "loading";
+  const confirmButtonDisabled = disabled;
+  const options = loading && !fetchFailed ? [] : users;
   return (
     <ResponsiveEditDialog
       labelId="add-user-to-role"
       title="Add Users to Role"
       open={open}
       onClose={onClose}
-      closeButtonDisabled={roleState === "loading"}
+      closeButtonDisabled={closeButtonDisabled}
       confirmButtonText="Save"
-      confirmButtonDisabled={roleState === "loading"}
+      confirmButtonDisabled={confirmButtonDisabled}
       isProcessing={roleState === "loading"}
     >
       <DialogContent>
+        {fetchFailed ? (
+          <DialogContentText error>Unable to retrieve users</DialogContentText>
+        ) : null}
+        {mutationFailed ? (
+          <DialogContentText error>
+            Unable to save changes, update failed
+          </DialogContentText>
+        ) : null}
         <DialogContentText>
           To find a user, search by name or email address.
         </DialogContentText>

@@ -6,7 +6,7 @@ const useAutocompleteOptionsLoading = () => {
 
   React.useEffect(() => {
     (async () => {
-      await delay(2000);
+      await delay(3000);
       setLoading(false);
     })();
   }, []);

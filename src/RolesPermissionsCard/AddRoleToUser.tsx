@@ -1,8 +1,8 @@
 import React from "react";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import AutocompleteComboboxField from "../AutocompleteComboboxField";
+import DialogContentText from "../DialogContentText";
 import ResponsiveEditDialog from "../ResponsiveEditDialog";
 import useAutocompleteOptionsLoading from "../useAutocompleteOptionsLoading";
 import { roles } from "../data";
@@ -20,21 +20,38 @@ export default function AddRoleToUser({
   onClose,
   onOpen
 }: AddRoleToUserProps) {
+  /** to see the fetch error state set this to true */
+  const fetchFailed: boolean = false;
+
+  /** to see the mutation error state set this to true */
+  const mutationFailed: boolean = true;
+
   const loading = useAutocompleteOptionsLoading();
-  const disabled = loading || userState === "loading";
-  const options = loading ? [] : roles;
+  const disabled = loading || userState === "loading" || fetchFailed;
+  const closeButtonDisabled = userState === "loading";
+  const confirmButtonDisabled = disabled;
+  const options = loading && !fetchFailed ? [] : roles;
+
   return (
     <ResponsiveEditDialog
       labelId="add-role-to-user"
       title="Add Role to User"
       open={open}
       onClose={onClose}
-      closeButtonDisabled={userState === "loading"}
+      closeButtonDisabled={closeButtonDisabled}
       confirmButtonText="Save"
-      confirmButtonDisabled={userState === "loading"}
+      confirmButtonDisabled={confirmButtonDisabled}
       isProcessing={userState === "loading"}
     >
       <DialogContent>
+        {fetchFailed ? (
+          <DialogContentText error>Unable to retrieve roles</DialogContentText>
+        ) : null}
+        {mutationFailed ? (
+          <DialogContentText error>
+            Unable to save changes, update failed
+          </DialogContentText>
+        ) : null}
         <DialogContentText>
           To find a role, search by role name.
         </DialogContentText>
