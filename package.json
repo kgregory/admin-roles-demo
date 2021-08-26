@@ -10,7 +10,7 @@
   "devDependencies": {
     "react-scripts": "latest"
   },
-  "description": "",
+  "description": "A demo for some of the changes that will be required for our administration app.  New and updated views, but not exhaustive.",
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "latest",
