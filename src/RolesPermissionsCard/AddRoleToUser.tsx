@@ -1,9 +1,10 @@
 import React from "react";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import AutocompleteComboboxField from "../AutocompleteComboboxField";
 import ResponsiveEditDialog from "../ResponsiveEditDialog";
+import useAutocompleteOptionsLoading from "../useAutocompleteOptionsLoading";
 import { roles } from "../data";
 
 interface AddRoleToUserProps {
@@ -19,6 +20,9 @@ export default function AddRoleToUser({
   onClose,
   onOpen
 }: AddRoleToUserProps) {
+  const loading = useAutocompleteOptionsLoading();
+  const disabled = loading || userState === "loading";
+  const options = loading ? [] : roles;
   return (
     <ResponsiveEditDialog
       labelId="add-role-to-user"
@@ -37,23 +41,20 @@ export default function AddRoleToUser({
         <Autocomplete<{ description: string }>
           autoHighlight
           autoSelect
-          disabled={userState === "loading"}
+          disabled={disabled}
           id="add-role-to-user-combobox"
-          options={roles}
+          options={options}
+          getOptionSelected={(option, value) =>
+            option.description === value.description
+          }
           getOptionLabel={(option) => option.description}
           renderInput={(params) => (
-            <TextField
+            <AutocompleteComboboxField
               {...params}
-              autoFocus
-              error={userState === "error"}
               id="add-role-to-user-input"
-              helperText={
-                userState === "error" ? "Role is required." : undefined
-              }
-              fullWidth
-              variant="outlined"
-              /** lastpass icon doesn't help here */
-              inputProps={{ ...params.inputProps, "data-lpignore": true }}
+              error={userState === "error"}
+              errorMessage="Role is required."
+              loading={loading}
             />
           )}
         />

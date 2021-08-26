@@ -1,8 +1,9 @@
 import React from "react";
 import DialogContent from "@material-ui/core/DialogContent";
-import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import AutocompleteComboboxField from "../AutocompleteComboboxField";
 import ResponsiveEditDialog from "../ResponsiveEditDialog";
+import useAutocompleteOptionsLoading from "../useAutocompleteOptionsLoading";
 import { userGroups } from "../data";
 
 interface EditRoleNameProps {
@@ -20,7 +21,13 @@ export default function EditUserGroup({
   onClose,
   onOpen
 }: EditRoleNameProps) {
-  const value = userGroups.find(({ description }) => description === userGroup);
+  const loading = useAutocompleteOptionsLoading();
+  const disabled = loading || roleState === "loading";
+  const options = loading ? [] : userGroups;
+  const currentValue = userGroups.find(
+    ({ description }) => description === userGroup
+  );
+  const value = loading || roleState === "error" ? "" : currentValue;
   return (
     <ResponsiveEditDialog
       labelId="edit-user-group"
@@ -36,26 +43,21 @@ export default function EditUserGroup({
         <Autocomplete<{ description: string }>
           autoHighlight
           autoSelect
-          disabled={roleState === "loading"}
+          disabled={disabled}
           id="edit-user-group-combobox"
-          options={userGroups}
+          options={options}
+          getOptionSelected={(option, value) =>
+            option.description === value.description
+          }
           getOptionLabel={(option) => option.description}
-          value={roleState === "error" ? "" : value}
+          value={value}
           renderInput={(params) => (
-            <TextField
-              {...params}
-              autoFocus
+            <AutocompleteComboboxField
               error={roleState === "error"}
+              errorMessage="STORIS User Group is required."
               id="edit-user-group-input"
-              helperText={
-                roleState === "error"
-                  ? "STORIS User Group is required."
-                  : undefined
-              }
-              fullWidth
-              variant="outlined"
-              /** lastpass icon doesn't help here */
-              inputProps={{ ...params.inputProps, "data-lpignore": true }}
+              loading={loading}
+              {...params}
             />
           )}
         />

@@ -2,11 +2,12 @@ import React from "react";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import ListItemText from "@material-ui/core/ListItemText";
-import TextField from "@material-ui/core/TextField";
 import Autocomplete, {
   createFilterOptions
 } from "@material-ui/lab/Autocomplete";
+import AutocompleteComboboxField from "../AutocompleteComboboxField";
 import ResponsiveEditDialog from "../ResponsiveEditDialog";
+import useAutocompleteOptionsLoading from "../useAutocompleteOptionsLoading";
 import { users } from "../data";
 import getFullName from "./getFullName";
 
@@ -27,6 +28,9 @@ export default function AddUserToRole({
   onClose,
   onOpen
 }: AddUserToRoleProps) {
+  const loading = useAutocompleteOptionsLoading();
+  const disabled = loading || roleState === "loading";
+  const options = loading ? [] : users;
   return (
     <ResponsiveEditDialog
       labelId="add-user-to-role"
@@ -47,23 +51,17 @@ export default function AddUserToRole({
           multiple
           filterSelectedOptions
           filterOptions={filterOptions}
-          disabled={roleState === "loading"}
+          disabled={disabled}
           id="add-user-to-role-combobox"
-          options={users}
+          options={options}
           getOptionLabel={(option) => getFullName(option.name)}
           renderInput={(params) => (
-            <TextField
+            <AutocompleteComboboxField
               {...params}
-              autoFocus
               error={roleState === "error"}
               id="add-user-to-role-input"
-              helperText={
-                roleState === "error" ? "User Group is required." : undefined
-              }
-              fullWidth
-              variant="outlined"
-              /** lastpass icon doesn't help here */
-              inputProps={{ ...params.inputProps, "data-lpignore": true }}
+              errorMessage="User Group is required."
+              loading={loading}
             />
           )}
           renderOption={({ name, email }) => (
