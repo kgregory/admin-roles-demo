@@ -47,7 +47,7 @@ export default function UserDetails({ onChangeView }) {
   const [user] = users;
   return (
     <div className={classes.root}>
-      <AdminAppBar>User Details</AdminAppBar>
+      <AdminAppBar onChangeView={onChangeView}>User Details</AdminAppBar>
       <Container className={classes.content}>
         <Grid spacing={2} container className={classes.section}>
           <Grid item xs={12} md={4} className={classes.section}>

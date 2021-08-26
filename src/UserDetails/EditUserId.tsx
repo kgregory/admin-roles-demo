@@ -40,6 +40,7 @@ export default function EditUserId({
           }
           value={userState === "error" ? "" : userId}
           fullWidth
+          inputProps={{ "data-lpignore": true }}
         />
       </DialogContent>
     </ResponsiveEditDialog>

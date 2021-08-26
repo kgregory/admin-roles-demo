@@ -48,7 +48,7 @@ export default function RoleDetails({ onChangeView }) {
   const roleState: "initial" | "loading" | "error" = "initial";
   return (
     <div className={classes.root}>
-      <AdminAppBar>Role Details</AdminAppBar>
+      <AdminAppBar onChangeView={onChangeView}>Role Details</AdminAppBar>
       <Container className={classes.content}>
         <Grid spacing={2} container className={classes.section}>
           <Grid item xs={12} md={4} className={classes.section}>
