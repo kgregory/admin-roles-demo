@@ -3,13 +3,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import AdminAppBar from "core/components/AdminAppBar";
-import CardEditor from "core/components/CardEditor";
-import useDialog from "core/hooks/useDialog";
+import CardData from "core/components/CardData";
 import toolbarRelativeStyles from "core/utils/toolbarRelativeStyles";
-import PermissionsUsersCard from "./PermissionsUsersCard";
 import DeleteButton from "./DeleteButton";
-import EditRoleName from "./EditRoleName";
-import EditUserGroup from "./EditUserGroup";
+import DetailsCard from "./DetailsCard";
+import ResendButton from "./ResendButton";
+import RolesCard from "./RolesCard";
 
 const useStyles = makeStyles((theme) => ({
   // this is what our theme usually uses
@@ -39,46 +38,38 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-interface RoleDetailsProps {
+interface InvitationDetailsProps {
   onChangeView: (view: string) => void;
 }
 
-export default function RoleDetails({ onChangeView }: RoleDetailsProps) {
+export default function InvitationDetails({
+  onChangeView
+}: InvitationDetailsProps) {
   const classes = useStyles();
-  const roleName = "Manager";
-  const userGroup = "Associates With Keys";
-  const roleNameDialog = useDialog();
-  const userGroupDialog = useDialog();
-  const roleState: "initial" | "loading" | "error" = "initial";
+  const invitation = {
+    email: "kjg@storis.com",
+    userId: "KJG",
+    expirationDate: "2021-07-25"
+  };
   return (
     <div className={classes.root}>
-      <AdminAppBar onChangeView={onChangeView}>Role Details</AdminAppBar>
+      <AdminAppBar onChangeView={onChangeView}>Invitation Details</AdminAppBar>
       <Container className={classes.content}>
         <Grid spacing={2} container className={classes.section}>
           <Grid item xs={12} md={4} className={classes.section}>
-            <CardEditor
-              label="Role Name"
-              value={roleName}
-              onClick={roleNameDialog.onOpen}
+            <DetailsCard
+              email={invitation.email}
+              expirationDate={invitation.expirationDate}
             />
-            <CardEditor
-              label="STORIS User Group"
-              value={userGroup}
-              onClick={userGroupDialog.onOpen}
-            />
+            <CardData label="STORIS User ID" value={invitation.userId} />
+            <ResendButton />
             <DeleteButton />
           </Grid>
           <Grid item xs={12} md={8} className={classes.section}>
-            <PermissionsUsersCard
-              userGroup={userGroup}
-              roleState={roleState}
-              onUserClick={() => onChangeView("userdetails")}
-            />
+            <RolesCard />
           </Grid>
         </Grid>
       </Container>
-      <EditRoleName {...{ ...roleNameDialog, roleState, roleName }} />
-      <EditUserGroup {...{ ...userGroupDialog, roleState, userGroup }} />
     </div>
   );
 }

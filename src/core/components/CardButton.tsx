@@ -11,16 +11,27 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CardButton = ({ label, icon, dialogText }) => {
+interface CardButtonProps {
+  label: string;
+  icon: React.ReactNode;
+  dialogText?: string;
+}
+
+const CardButton = ({ label, icon, dialogText }: CardButtonProps) => {
   const [loading, setLoading] = React.useState(false);
   const classes = useStyles();
   const confirmationDialog = useConfirmationDialog(() => {});
+
   const handleAffirmative = async () => {
     setLoading(true);
     await delay(2000);
     setLoading(false);
     confirmationDialog.onAffirmative();
   };
+
+  /** awful mode thing for demo purposes */
+  const isConfirmable = dialogText != null;
+
   return (
     <>
       <Button
@@ -28,7 +39,7 @@ const CardButton = ({ label, icon, dialogText }) => {
         variant="outlined"
         startIcon={icon}
         className={classes.button}
-        onClick={() => confirmationDialog.onOpen()}
+        onClick={() => (isConfirmable ? confirmationDialog.onOpen() : () => {})}
       >
         {label}
       </Button>

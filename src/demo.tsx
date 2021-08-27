@@ -1,30 +1,28 @@
 import React from "react";
 import UserDetails from "./UserDetails";
 import RoleDetails from "./RoleDetails";
+import InvitationDetails from "./InvitationDetails";
 
 interface DemoState {
-  view: "userdetails" | "roledetails";
+  view: "userdetails" | "roledetails" | "invitationdetails";
 }
 
 const initialState: DemoState = {
   view: "userdetails"
 };
 
-const reducer = (state: DemoState, action) => {
+const reducer = (state: DemoState, action: { type: string; view: string }) => {
   switch (action.type) {
     case "setView":
       window.scroll(0, 0);
       return { view: action.view };
     default:
-      throw new Error("unsupported action");
+      return state;
   }
 };
 
 export default function AdminAppDemo() {
-  const [state, dispatch] = React.useReducer<typeof reducer>(
-    reducer,
-    initialState
-  );
+  const [state, dispatch] = React.useReducer(reducer, initialState, (s) => s);
 
   const onChangeView = React.useCallback(
     (view) => dispatch({ type: "setView", view }),
@@ -36,6 +34,8 @@ export default function AdminAppDemo() {
       return <UserDetails onChangeView={onChangeView} />;
     case "roledetails":
       return <RoleDetails onChangeView={onChangeView} />;
+    case "invitationdetails":
+      return <InvitationDetails onChangeView={onChangeView} />;
     default:
       return <div>No</div>;
   }

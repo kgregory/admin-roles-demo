@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     ...toolbarRelativeStyles(
       "marginTop",
       theme,
-      (value) => value + theme.spacing(3)
+      (value) => (value as number) + theme.spacing(3)
     ),
     marginBottom: theme.spacing(3)
   },

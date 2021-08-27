@@ -29,7 +29,12 @@ const useAdminAppBarStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const AdminAppBar = ({ children, onChangeView }) => {
+interface AdminAppBarProps {
+  children: React.ReactNode;
+  onChangeView: (view: string) => void;
+}
+
+const AdminAppBar = ({ children, onChangeView }: AdminAppBarProps) => {
   const classes = useAdminAppBarStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -84,6 +89,7 @@ const AdminAppBar = ({ children, onChangeView }) => {
           >
             {[
               { text: "User Details", view: "userdetails" },
+              { text: "Invitation Details", view: "invitationdetails" },
               { text: "Role Details", view: "roledetails" }
             ].map(({ text, view }, index) => (
               <ListItem button key={text} onClick={() => onChangeView(view)}>
