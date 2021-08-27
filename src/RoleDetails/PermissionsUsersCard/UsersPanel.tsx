@@ -10,12 +10,12 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Toolbar from "@material-ui/core/Toolbar";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
-import InitialsAvatar from "../InitialsAvatar";
-import ConfirmationDialog from "../ConfirmationDialog";
-import useConfirmationDialog from "../useConfirmationDialog";
-import stickyStyles from "../stickyStyles";
-import useDialog from "../useDialog";
-import { users } from "../data";
+import InitialsAvatar from "../../core/components/InitialsAvatar";
+import ConfirmationDialog from "../../core/components/ConfirmationDialog";
+import { users } from "../../core/constants/data";
+import useConfirmationDialog from "../../core/hooks/useConfirmationDialog";
+import useDialog from "../../core/hooks/useDialog";
+import stickyStyles from "../../core/utils/stickyStyles";
 import AddUserToRole from "./AddUserToRole";
 import getFullName from "./getFullName";
 

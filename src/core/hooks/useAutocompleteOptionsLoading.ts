@@ -1,5 +1,5 @@
 import React from "react";
-import delay from "./delay";
+import delay from "../utils/delay";
 
 const useAutocompleteOptionsLoading = () => {
   const [loading, setLoading] = React.useState(true);

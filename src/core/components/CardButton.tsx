@@ -2,8 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import ConfirmationDialog from "./ConfirmationDialog";
-import useConfirmationDialog from "./useConfirmationDialog";
-import delay from "./delay";
+import useConfirmationDialog from "../hooks/useConfirmationDialog";
+import delay from "../utils/delay";
 
 const useStyles = makeStyles((theme) => ({
   button: {

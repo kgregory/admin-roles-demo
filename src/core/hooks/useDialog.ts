@@ -1,8 +1,7 @@
 import React from "react";
-import { useState } from "react";
 
 const useDialog = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
   return React.useMemo(
     () => ({
       open: isOpen,

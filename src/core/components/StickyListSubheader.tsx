@@ -1,6 +1,6 @@
 import ListSubheader from "@material-ui/core/ListSubheader";
 import { makeStyles } from "@material-ui/core/styles";
-import stickyStyles from "./stickyStyles";
+import stickyStyles from "../utils/stickyStyles";
 
 const useStyles = makeStyles((theme) => ({
   sticky: {

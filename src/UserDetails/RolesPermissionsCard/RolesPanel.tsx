@@ -9,11 +9,11 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Toolbar from "@material-ui/core/Toolbar";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
-import ConfirmationDialog from "../ConfirmationDialog";
-import useConfirmationDialog from "../useConfirmationDialog";
-import useDialog from "../useDialog";
+import ConfirmationDialog from "../../core/components/ConfirmationDialog";
+import { roles } from "../../core/constants/data";
+import useConfirmationDialog from "../../core/hooks/useConfirmationDialog";
+import useDialog from "../../core/hooks/useDialog";
 import AddRoleToUser from "./AddRoleToUser";
-import { roles } from "../data";
 
 const useStyles = makeStyles((theme) => ({
   grow: {

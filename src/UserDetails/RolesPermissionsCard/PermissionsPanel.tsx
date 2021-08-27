@@ -1,6 +1,6 @@
 import React from "react";
-import PermissionsList from "../PermissionsList";
-import { permissions } from "../data";
+import PermissionsList from "../../core/components/PermissionsList";
+import { permissions } from "../../core/constants/data";
 
 const PermissionsPanel = () => {
   return (

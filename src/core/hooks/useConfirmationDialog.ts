@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import React from "react";
 
 interface UseConfirmationDialogResults {
   open: boolean;
@@ -10,8 +10,8 @@ interface UseConfirmationDialogResults {
 const useConfirmationDialog = (
   onConfirmed: () => void
 ): UseConfirmationDialogResults => {
-  const [isOpen, setIsOpen] = useState(false);
-  return useMemo(
+  const [isOpen, setIsOpen] = React.useState(false);
+  return React.useMemo(
     () => ({
       open: isOpen,
       onOpen: () => {
