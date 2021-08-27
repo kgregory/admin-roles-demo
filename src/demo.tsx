@@ -2,9 +2,10 @@ import React from "react";
 import UserDetails from "./UserDetails";
 import RoleDetails from "./RoleDetails";
 import InvitationDetails from "./InvitationDetails";
+import AppDetails from "./AppDetails";
 
 interface DemoState {
-  view: "userdetails" | "roledetails" | "invitationdetails";
+  view: "userdetails" | "roledetails" | "invitationdetails" | "appdetails";
 }
 
 const initialState: DemoState = {
@@ -36,6 +37,8 @@ export default function AdminAppDemo() {
       return <RoleDetails onChangeView={onChangeView} />;
     case "invitationdetails":
       return <InvitationDetails onChangeView={onChangeView} />;
+    case "appdetails":
+      return <AppDetails onChangeView={onChangeView} />;
     default:
       return <div>No</div>;
   }

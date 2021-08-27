@@ -10,6 +10,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+import StickyListSubheader from "core/components/StickyListSubheader";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,6 +61,7 @@ interface PermissionsListProps {
   permissions: Permission[];
   onToggleCheckedItem: (p: string) => void;
   showInherited?: boolean;
+  subheader?: string;
 }
 
 const PermissionsList = ({
@@ -67,7 +69,8 @@ const PermissionsList = ({
   isEditing,
   onToggleCheckedItem,
   permissions,
-  showInherited = true
+  showInherited = true,
+  subheader
 }: PermissionsListProps) => {
   const classes = useStyles();
   const permissionsMap = React.useMemo(
@@ -87,7 +90,17 @@ const PermissionsList = ({
   ]);
 
   return (
-    <List className={classes.root} component="nav">
+    <List
+      className={classes.root}
+      component="nav"
+      subheader={
+        subheader != null ? (
+          <StickyListSubheader component="div" id={`invitation-details-roles`}>
+            {subheader}
+          </StickyListSubheader>
+        ) : undefined
+      }
+    >
       {permissionKeys.map((category) => (
         <ExpandableListItem
           key={`item-category-${category}`}

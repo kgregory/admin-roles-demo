@@ -88,6 +88,7 @@ const AdminAppBar = ({ children, onChangeView }: AdminAppBarProps) => {
             }
           >
             {[
+              { text: "App Details", view: "appdetails" },
               { text: "User Details", view: "userdetails" },
               { text: "Invitation Details", view: "invitationdetails" },
               { text: "Role Details", view: "roledetails" }
