@@ -1,7 +1,7 @@
 import React from "react";
 import DialogContent from "@material-ui/core/DialogContent";
 import TextField from "@material-ui/core/TextField";
-import ResponsiveEditDialog from "../ResponsiveEditDialog";
+import ResponsiveEditDialog from "/src/core/components/ResponsiveEditDialog";
 
 interface EditRoleNameProps {
   roleName: string;

@@ -9,10 +9,10 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Toolbar from "@material-ui/core/Toolbar";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
-import ConfirmationDialog from "../../core/components/ConfirmationDialog";
-import { roles } from "../../core/constants/data";
-import useConfirmationDialog from "../../core/hooks/useConfirmationDialog";
-import useDialog from "../../core/hooks/useDialog";
+import ConfirmationDialog from "/src/core/components/ConfirmationDialog";
+import { roles } from "/src/core/constants/data";
+import useConfirmationDialog from "/src/core/hooks/useConfirmationDialog";
+import useDialog from "/src/core/hooks/useDialog";
 import AddRoleToUser from "./AddRoleToUser";
 
 const useStyles = makeStyles((theme) => ({

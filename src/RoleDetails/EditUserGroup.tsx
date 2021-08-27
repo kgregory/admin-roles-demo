@@ -1,11 +1,11 @@
 import React from "react";
 import DialogContent from "@material-ui/core/DialogContent";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import AutocompleteComboboxField from "../AutocompleteComboboxField";
-import DialogContentText from "../DialogContentText";
-import ResponsiveEditDialog from "../ResponsiveEditDialog";
-import useAutocompleteOptionsLoading from "../useAutocompleteOptionsLoading";
-import { userGroups } from "../data";
+import AutocompleteComboboxField from "../core/components/AutocompleteComboboxField";
+import DialogContentText from "../core/components/DialogContentText";
+import ResponsiveEditDialog from "../core/components/ResponsiveEditDialog";
+import { userGroups } from "../core/constants/data";
+import useAutocompleteOptionsLoading from "../core/hooks/useAutocompleteOptionsLoading";
 
 interface EditRoleNameProps {
   userGroup: string;

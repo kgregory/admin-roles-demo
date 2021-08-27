@@ -1,6 +1,6 @@
 import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
-import CardButton from "../CardButton";
+import CardButton from "/src/core/components/CardButton";
 
 const DeleteButton = () => (
   <CardButton

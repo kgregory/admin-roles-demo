@@ -8,8 +8,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import EditIcon from "@material-ui/icons/Edit";
-import stickyStyles from "../../core/utils/stickyStyles";
-import delay from "../../core/utils/delay";
+import stickyStyles from "/src/core/utils/stickyStyles";
+import delay from "/src/core/utils/delay";
 
 const useEditToolbarStyles = makeStyles((theme) => ({
   grow: {

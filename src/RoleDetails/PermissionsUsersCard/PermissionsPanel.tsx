@@ -1,9 +1,9 @@
 import React from "react";
 import EditToolbar from "./EditToolbar";
-import ConfirmationDialog from "../../core/components/ConfirmationDialog";
-import PermissionsList from "../../core/components/PermissionsList";
-import { permissions } from "../../core/constants/data";
-import useConfirmationDialog from "../../core/hooks/useConfirmationDialog";
+import ConfirmationDialog from "/src/core/components/ConfirmationDialog";
+import PermissionsList from "/src/core/components/PermissionsList";
+import { permissions } from "/src/core/constants/data";
+import useConfirmationDialog from "/src/core/hooks/useConfirmationDialog";
 
 const useCheckedItems = (items) => {
   const [originalChecked, setOriginalChecked] = React.useState(

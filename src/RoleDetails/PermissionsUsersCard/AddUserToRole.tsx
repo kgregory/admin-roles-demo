@@ -4,11 +4,11 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Autocomplete, {
   createFilterOptions
 } from "@material-ui/lab/Autocomplete";
-import AutocompleteComboboxField from "../../core/components/AutocompleteComboboxField";
-import DialogContentText from "../../core/components/DialogContentText";
-import ResponsiveEditDialog from "../../core/components/ResponsiveEditDialog";
-import { users } from "../../core/constants/data";
-import useAutocompleteOptionsLoading from "../../core/hooks/useAutocompleteOptionsLoading";
+import AutocompleteComboboxField from "/src/core/components/AutocompleteComboboxField";
+import DialogContentText from "/src/core/components/DialogContentText";
+import ResponsiveEditDialog from "/src/core/components/ResponsiveEditDialog";
+import { users } from "/src/core/constants/data";
+import useAutocompleteOptionsLoading from "/src/core/hooks/useAutocompleteOptionsLoading";
 import getFullName from "./getFullName";
 
 interface AddUserToRoleProps {
