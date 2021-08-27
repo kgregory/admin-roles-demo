@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ResponsiveDialog from "./ResponsiveDialog";
+import type { ResponsiveDialogProps } from "./ResponsiveDialog";
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -10,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ResponsiveEntryDialog = (props) => {
+const ResponsiveEntryDialog = (props: ResponsiveDialogProps) => {
   const classes = useStyles();
   return <ResponsiveDialog {...props} classes={{ paper: classes.dialog }} />;
 };

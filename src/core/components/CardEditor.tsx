@@ -18,7 +18,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const CardEditor = ({ label, value, onClick = undefined }) => {
+interface CardEditorProps {
+  label: string;
+  value: any;
+  onClick?: () => void;
+}
+
+const CardEditor = ({ label, value, onClick }: CardEditorProps) => {
   const classes = useStyles();
   return (
     <Paper>

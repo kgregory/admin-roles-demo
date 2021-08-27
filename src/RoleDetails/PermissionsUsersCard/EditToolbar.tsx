@@ -8,17 +8,25 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import EditIcon from "@material-ui/icons/Edit";
-import stickyStyles from "/src/core/utils/stickyStyles";
-import delay from "/src/core/utils/delay";
+import stickyStyles from "core/utils/stickyStyles";
+import delay from "core/utils/delay";
+
+interface EditToolbarProps {
+  editTitle: string;
+  isEditing: boolean;
+  onToggleEdit: () => void;
+  onSave?: () => void;
+  sticky?: boolean;
+}
 
 const useEditToolbarStyles = makeStyles((theme) => ({
   grow: {
     flex: 1
   },
-  progress: (sticky) => ({
+  progress: (sticky: boolean) => ({
     ...stickyStyles(theme, { sticky, stuckToolbars: 2 })
   }),
-  toolbar: (sticky) => ({
+  toolbar: (sticky: boolean) => ({
     // better consistency with highlight mode
     "& > button:first-child": {
       marginLeft: -8
@@ -30,7 +38,7 @@ const useEditToolbarStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(2),
     ...stickyStyles(theme, { sticky })
   }),
-  highlight: (sticky) => ({
+  highlight: () => ({
     "& > button:first-child": {
       // aligns close button with checkboxes
       marginLeft: -14
@@ -56,7 +64,7 @@ const EditToolbar = ({
   onToggleEdit,
   onSave = onToggleEdit,
   sticky = false
-}) => {
+}: EditToolbarProps) => {
   const classes = useEditToolbarStyles(sticky);
   const [loading, setLoading] = React.useState(false);
 

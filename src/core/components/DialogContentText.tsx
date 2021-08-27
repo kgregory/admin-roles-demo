@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
   error: { color: theme.palette.error.main }
 }));
 
-export default function DialogContentTextWrapper({ error, ...props }) {
+export default function DialogContentTextWrapper({ error = false, ...props }) {
   const classes = useStyles();
   const classOverrides = error ? { root: classes.error } : undefined;
   return <DialogContentText classes={classOverrides} {...props} />;

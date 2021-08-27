@@ -2,10 +2,10 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import AdminAppBar from "../core/components/AdminAppBar";
-import CardEditor from "../core/components/CardEditor";
-import useDialog from "../core/hooks/useDialog";
-import toolbarRelativeStyles from "../core/utils/toolbarRelativeStyles";
+import AdminAppBar from "core/components/AdminAppBar";
+import CardEditor from "core/components/CardEditor";
+import useDialog from "core/hooks/useDialog";
+import toolbarRelativeStyles from "core/utils/toolbarRelativeStyles";
 import PermissionsUsersCard from "./PermissionsUsersCard";
 import DeleteButton from "./DeleteButton";
 import EditRoleName from "./EditRoleName";
@@ -39,7 +39,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function RoleDetails({ onChangeView }) {
+interface RoleDetailsProps {
+  onChangeView: (view: string) => void;
+}
+
+export default function RoleDetails({ onChangeView }: RoleDetailsProps) {
   const classes = useStyles();
   const roleName = "Manager";
   const userGroup = "Associates With Keys";

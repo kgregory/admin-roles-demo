@@ -7,30 +7,35 @@ import PermissionsPanel from "./PermissionsPanel";
 
 const useEditableTabs = () => {
   const [value, setValue] = React.useState(0);
-  const [isEditingUsers, setIsEditingUsers] = React.useState(false);
   const [isEditingPerms, setIsEditingPerms] = React.useState(false);
   return React.useMemo(
     () => ({
       value,
-      isEditingUsers,
       isEditingPerms,
       onChange: (event: React.ChangeEvent<{}>, newValue: number) => {
         setValue(newValue);
       },
-      onToggleEditUsers: () => setIsEditingUsers((v) => !v),
       onToggleEditPerms: () => setIsEditingPerms((v) => !v)
     }),
-    [value, isEditingUsers, isEditingPerms]
+    [value, isEditingPerms]
   );
 };
 
-const PermissionsUsersCard = ({ userGroup, roleState, onUserClick }) => {
+interface PermissionsUsersCardProps {
+  userGroup: string;
+  roleState: "initial" | "loading" | "error";
+  onUserClick: () => void;
+}
+
+const PermissionsUsersCard = ({
+  userGroup,
+  roleState,
+  onUserClick
+}: PermissionsUsersCardProps) => {
   const {
     value,
     onChange,
     isEditingPerms,
-    isEditingUsers,
-    onToggleEditUsers,
     onToggleEditPerms
   } = useEditableTabs();
 
@@ -44,16 +49,11 @@ const PermissionsUsersCard = ({ userGroup, roleState, onUserClick }) => {
         textColor="primary"
         aria-label="user roles/permissions tabs"
       >
-        <Tab label="Permissions" disabled={isEditingUsers} />
+        <Tab label="Permissions" />
         <Tab label="Users" disabled={isEditingPerms} />
       </Tabs>
       {value === 1 ? (
-        <UsersPanel
-          isEditing={isEditingUsers}
-          onToggleEdit={onToggleEditUsers}
-          onUserClick={onUserClick}
-          roleState={roleState}
-        />
+        <UsersPanel onUserClick={onUserClick} roleState={roleState} />
       ) : null}
       {value === 0 ? (
         <PermissionsPanel

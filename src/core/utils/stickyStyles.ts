@@ -1,7 +1,8 @@
+import type { Theme } from "@material-ui/core/styles";
 import toolbarRelativeStyles from "./toolbarRelativeStyles";
 
 const stickyStyles = (
-  theme,
+  theme: Theme,
   {
     sticky = true,
     backgroundColor = theme.palette.background.paper,

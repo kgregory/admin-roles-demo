@@ -1,5 +1,5 @@
 import React from "react";
-import delay from "/src/core/utils/delay";
+import delay from "core/utils/delay";
 import useIsMounted from "./useIsMounted";
 
 const useAutocompleteOptionsLoading = () => {

@@ -10,12 +10,12 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Toolbar from "@material-ui/core/Toolbar";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
-import InitialsAvatar from "/src/core/components/InitialsAvatar";
-import ConfirmationDialog from "/src/core/components/ConfirmationDialog";
-import { users } from "/src/core/constants/data";
-import useConfirmationDialog from "/src/core/hooks/useConfirmationDialog";
-import useDialog from "/src/core/hooks/useDialog";
-import stickyStyles from "/src/core/utils/stickyStyles";
+import InitialsAvatar from "core/components/InitialsAvatar";
+import ConfirmationDialog from "core/components/ConfirmationDialog";
+import { users } from "core/constants/data";
+import useConfirmationDialog from "core/hooks/useConfirmationDialog";
+import useDialog from "core/hooks/useDialog";
+import stickyStyles from "core/utils/stickyStyles";
 import AddUserToRole from "./AddUserToRole";
 import getFullName from "./getFullName";
 
@@ -37,14 +37,21 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const UsersPanel = ({ isEditing, onUserClick, onToggleEdit, roleState }) => {
+interface UsersPanelProps {
+  onUserClick: () => void;
+  roleState: "initial" | "loading" | "error";
+}
+
+const UsersPanel = ({ onUserClick, roleState }: UsersPanelProps) => {
   const classes = useStyles();
   const confirmationDialog = useConfirmationDialog(() => {});
   const sortedUsers = React.useMemo(
     () =>
       users
         .slice(0)
-        .sort((a, b) => getFullName(a.name).localeCompare(getFullName(b.name))),
+        .sort((a, b) =>
+          (getFullName(a.name) ?? "").localeCompare(getFullName(b.name) ?? "")
+        ),
     []
   );
   const addUserToRoleDialog = useDialog();
@@ -64,7 +71,7 @@ const UsersPanel = ({ isEditing, onUserClick, onToggleEdit, roleState }) => {
       </Toolbar>
       <List>
         {sortedUsers.map(({ name, email }) => {
-          const fullname = getFullName(name);
+          const fullname = getFullName(name) ?? "";
           return (
             <ListItem key={fullname} button onClick={onUserClick}>
               <ListItemIcon>

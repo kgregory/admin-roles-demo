@@ -9,7 +9,7 @@ import FullScreenDialogHeading from "./FullScreenDialogHeading";
 import ModalDialogActions from "./ModalDialogActions";
 import ModalDialogHeading from "./ModalDialogHeading";
 
-interface ResponsiveDialogProps extends DialogProps {
+export interface ResponsiveDialogProps extends DialogProps {
   closeButtonDisabled?: boolean;
   closeButtonText?: string | null;
   confirmButtonDisabled?: boolean;

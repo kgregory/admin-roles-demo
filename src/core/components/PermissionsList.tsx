@@ -5,6 +5,7 @@ import Chip from "@material-ui/core/Chip";
 import Collapse from "@material-ui/core/Collapse";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import type { ListItemProps } from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ExpandLess from "@material-ui/icons/ExpandLess";
@@ -18,7 +19,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const ExpandableListItem = ({ primary, children, ...other }) => {
+interface ExpandableListItemProps extends ListItemProps {
+  primary: string;
+}
+
+const ExpandableListItem = ({
+  primary,
+  children,
+  ...other
+}: ExpandableListItemProps) => {
   const [open, setOpen] = React.useState(true);
   const handleToggle = React.useCallback(() => {
     setOpen((o) => !o);
@@ -38,13 +47,28 @@ const ExpandableListItem = ({ primary, children, ...other }) => {
   );
 };
 
+interface Permission {
+  category: string;
+  description: string;
+  active: boolean;
+  inherited: boolean;
+}
+
+interface PermissionsListProps {
+  checkedPermissions: any[];
+  isEditing: boolean;
+  permissions: Permission[];
+  onToggleCheckedItem: (p: string) => void;
+  showInherited?: boolean;
+}
+
 const PermissionsList = ({
   checkedPermissions,
   isEditing,
   onToggleCheckedItem,
   permissions,
   showInherited = true
-}) => {
+}: PermissionsListProps) => {
   const classes = useStyles();
   const permissionsMap = React.useMemo(
     () =>
@@ -55,7 +79,7 @@ const PermissionsList = ({
           categoryPerms.push(perm);
           acc.set(perm.category, categoryPerms);
           return acc;
-        }, new Map()),
+        }, new Map<string, Permission[]>()),
     [permissions]
   );
   const permissionKeys = React.useMemo(() => [...permissionsMap.keys()], [
@@ -69,9 +93,8 @@ const PermissionsList = ({
           key={`item-category-${category}`}
           primary={category}
         >
-          {permissionsMap
-            .get(category)
-            .map(({ description: permission, active, inherited }) => (
+          {(permissionsMap.get(category) ?? []).map(
+            ({ description: permission, active, inherited }) => (
               <ListItem
                 key={`item-permissions-${permission}`}
                 role={isEditing ? undefined : "listitem"}
@@ -112,7 +135,8 @@ const PermissionsList = ({
                   />
                 ) : null}
               </ListItem>
-            ))}
+            )
+          )}
         </ExpandableListItem>
       ))}
     </List>

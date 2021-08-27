@@ -1,11 +1,11 @@
 import React from "react";
 import DialogContent from "@material-ui/core/DialogContent";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import AutocompleteComboboxField from "../core/components/AutocompleteComboboxField";
-import DialogContentText from "../core/components/DialogContentText";
-import ResponsiveEditDialog from "../core/components/ResponsiveEditDialog";
-import { userGroups } from "../core/constants/data";
-import useAutocompleteOptionsLoading from "../core/hooks/useAutocompleteOptionsLoading";
+import AutocompleteComboboxField from "core/components/AutocompleteComboboxField";
+import DialogContentText from "core/components/DialogContentText";
+import ResponsiveEditDialog from "core/components/ResponsiveEditDialog";
+import { userGroups } from "core/constants/data";
+import useAutocompleteOptionsLoading from "core/hooks/useAutocompleteOptionsLoading";
 
 interface EditRoleNameProps {
   userGroup: string;
@@ -37,7 +37,7 @@ export default function EditUserGroup({
     ({ description }) => description === userGroup
   );
   const value =
-    fetchFailed || loading || roleState === "error" ? "" : currentValue;
+    fetchFailed || loading || roleState === "error" ? null : currentValue;
   return (
     <ResponsiveEditDialog
       labelId="edit-user-group"
@@ -75,7 +75,6 @@ export default function EditUserGroup({
             <AutocompleteComboboxField
               error={roleState === "error"}
               errorMessage="STORIS User Group is required."
-              id="edit-user-group-input"
               loading={loading}
               {...params}
             />

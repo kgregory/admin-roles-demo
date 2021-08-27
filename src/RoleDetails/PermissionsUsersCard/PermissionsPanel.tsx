@@ -1,11 +1,11 @@
 import React from "react";
 import EditToolbar from "./EditToolbar";
-import ConfirmationDialog from "/src/core/components/ConfirmationDialog";
-import PermissionsList from "/src/core/components/PermissionsList";
-import { permissions } from "/src/core/constants/data";
-import useConfirmationDialog from "/src/core/hooks/useConfirmationDialog";
+import ConfirmationDialog from "core/components/ConfirmationDialog";
+import PermissionsList from "core/components/PermissionsList";
+import { permissions } from "core/constants/data";
+import useConfirmationDialog from "core/hooks/useConfirmationDialog";
 
-const useCheckedItems = (items) => {
+const useCheckedItems = (items: { active: boolean; description: string }[]) => {
   const [originalChecked, setOriginalChecked] = React.useState(
     items.map(({ active }) => active)
   );
@@ -38,7 +38,17 @@ const useCheckedItems = (items) => {
   );
 };
 
-const PermissionsPanel = ({ userGroup, isEditing, onToggleEdit }) => {
+interface PermissionsPanelProps {
+  userGroup: string;
+  isEditing: boolean;
+  onToggleEdit: () => void;
+}
+
+const PermissionsPanel = ({
+  userGroup,
+  isEditing,
+  onToggleEdit
+}: PermissionsPanelProps) => {
   const {
     checked,
     count,
