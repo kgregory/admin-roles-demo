@@ -6,6 +6,7 @@ import AdminAppBar from "core/components/AdminAppBar";
 import CardEditor from "core/components/CardEditor";
 import toolbarRelativeStyles from "core/utils/toolbarRelativeStyles";
 import useDialog from "core/hooks/useDialog";
+import type { DemoView } from "core/types";
 import DeleteButton from "./DeleteButton";
 import DetailsCard from "./DetailsCard";
 import PermissionsCard from "./PermissionsCard";
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface AppDetailsProps {
-  onChangeView: (view: string) => void;
+  onChangeView: (view: DemoView) => void;
 }
 
 export default function AppDetails({ onChangeView }: AppDetailsProps) {

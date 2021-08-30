@@ -11,7 +11,12 @@ const useStyles = makeStyles((theme) => ({
 
 const StickyListSubheader = (props: ListSubheaderProps) => {
   const classes = useStyles();
-  return <ListSubheader {...props} classes={{ sticky: classes.sticky }} />;
+  return (
+    <ListSubheader
+      {...props}
+      classes={{ ...props.classes, sticky: classes.sticky }}
+    />
+  );
 };
 
 export default StickyListSubheader;

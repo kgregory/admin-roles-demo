@@ -11,14 +11,14 @@ const AutocompleteComboboxField = ({
 }) => {
   return (
     <TextField
+      variant="outlined"
       {...props}
       autoFocus
       disabled={loading}
       error={error}
       id={id}
-      helperText={error ? errorMessage : undefined}
+      helperText={error ? errorMessage : props.helperText}
       fullWidth
-      variant="outlined"
       InputProps={{
         ...props.InputProps,
         endAdornment: (

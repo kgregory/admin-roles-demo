@@ -16,7 +16,11 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       backgroundColor: theme.palette.background.paper
-    }
+    },
+    gutters: ({ gutters }: { gutters: number }) => ({
+      paddingLeft: gutters != null ? theme.spacing(gutters) : undefined,
+      paddingRight: gutters != null ? theme.spacing(gutters) : undefined
+    })
   })
 );
 
@@ -62,6 +66,7 @@ interface PermissionsListProps {
   onToggleCheckedItem: (p: string) => void;
   showInherited?: boolean;
   subheader?: string;
+  gutters?: number;
 }
 
 const PermissionsList = ({
@@ -70,9 +75,10 @@ const PermissionsList = ({
   onToggleCheckedItem,
   permissions,
   showInherited = true,
-  subheader
+  subheader,
+  gutters
 }: PermissionsListProps) => {
-  const classes = useStyles();
+  const classes = useStyles({ gutters });
   const permissionsMap = React.useMemo(
     () =>
       permissions
@@ -95,7 +101,11 @@ const PermissionsList = ({
       component="nav"
       subheader={
         subheader != null ? (
-          <StickyListSubheader component="div" id={`invitation-details-roles`}>
+          <StickyListSubheader
+            component="div"
+            id={`invitation-details-roles`}
+            classes={{ gutters: classes.gutters }}
+          >
             {subheader}
           </StickyListSubheader>
         ) : undefined
@@ -105,6 +115,7 @@ const PermissionsList = ({
         <ExpandableListItem
           key={`item-category-${category}`}
           primary={category}
+          classes={{ gutters: classes.gutters }}
         >
           {(permissionsMap.get(category) ?? []).map(
             ({ description: permission, active, inherited }) => (
@@ -117,6 +128,7 @@ const PermissionsList = ({
                 onClick={
                   isEditing ? onToggleCheckedItem(permission) : undefined
                 }
+                classes={{ gutters: classes.gutters }}
               >
                 <ListItemIcon>
                   <Checkbox

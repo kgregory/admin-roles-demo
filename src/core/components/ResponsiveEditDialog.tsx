@@ -11,9 +11,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ResponsiveEntryDialog = (props: ResponsiveDialogProps) => {
+const ResponsiveEditDialog = (props: ResponsiveDialogProps) => {
   const classes = useStyles();
   return <ResponsiveDialog {...props} classes={{ paper: classes.dialog }} />;
 };
 
-export default ResponsiveEntryDialog;
+export default ResponsiveEditDialog;

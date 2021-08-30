@@ -14,6 +14,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import type { DemoView } from "core/types";
 
 const useAdminAppBarStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,7 +32,7 @@ const useAdminAppBarStyles = makeStyles((theme: Theme) =>
 
 interface AdminAppBarProps {
   children: React.ReactNode;
-  onChangeView: (view: string) => void;
+  onChangeView: (view: DemoView) => void;
 }
 
 const AdminAppBar = ({ children, onChangeView }: AdminAppBarProps) => {
@@ -88,6 +89,7 @@ const AdminAppBar = ({ children, onChangeView }: AdminAppBarProps) => {
             }
           >
             {[
+              { text: "Add Role Dialog", view: "addrole" },
               { text: "App Details", view: "appdetails" },
               { text: "User Details", view: "userdetails" },
               { text: "Invitation Details", view: "invitationdetails" },

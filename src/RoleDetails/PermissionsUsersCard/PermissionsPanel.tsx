@@ -3,40 +3,8 @@ import EditToolbar from "./EditToolbar";
 import ConfirmationDialog from "core/components/ConfirmationDialog";
 import PermissionsList from "core/components/PermissionsList";
 import { permissions } from "core/constants/data";
+import useCheckedPermissions from "core/hooks/useCheckedPermissions";
 import useConfirmationDialog from "core/hooks/useConfirmationDialog";
-
-const useCheckedItems = (items: { active: boolean; description: string }[]) => {
-  const [originalChecked, setOriginalChecked] = React.useState(
-    items.map(({ active }) => active)
-  );
-  const [checked, setChecked] = React.useState(originalChecked);
-  const [count, setCount] = React.useState(0);
-
-  return React.useMemo(
-    () => ({
-      checked,
-      count,
-      originalChecked,
-      setChecked,
-      setCount,
-      setOriginalChecked,
-      handleToggle: (value: string) => () => {
-        const currentIndex = items.findIndex(
-          ({ description }) => description === value
-        );
-        const newChecked = [...checked];
-        newChecked[currentIndex] = !newChecked[currentIndex];
-        setChecked(newChecked);
-        setCount((c) =>
-          newChecked[currentIndex] !== originalChecked[currentIndex]
-            ? (c += 1)
-            : (c -= 1)
-        );
-      }
-    }),
-    [checked, count, items, originalChecked]
-  );
-};
 
 interface PermissionsPanelProps {
   userGroup: string;
@@ -57,7 +25,7 @@ const PermissionsPanel = ({
     setChecked,
     setCount,
     setOriginalChecked
-  } = useCheckedItems(permissions);
+  } = useCheckedPermissions(permissions);
 
   const handleCancel = React.useCallback(() => {
     setChecked(originalChecked);

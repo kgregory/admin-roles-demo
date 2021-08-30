@@ -5,6 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import AdminAppBar from "core/components/AdminAppBar";
 import CardData from "core/components/CardData";
 import toolbarRelativeStyles from "core/utils/toolbarRelativeStyles";
+import { DemoView } from "core/types";
 import DeleteButton from "./DeleteButton";
 import DetailsCard from "./DetailsCard";
 import ResendButton from "./ResendButton";
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface InvitationDetailsProps {
-  onChangeView: (view: string) => void;
+  onChangeView: (view: DemoView) => void;
 }
 
 export default function InvitationDetails({
