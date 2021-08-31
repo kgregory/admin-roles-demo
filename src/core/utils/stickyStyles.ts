@@ -18,7 +18,8 @@ const stickyStyles = (
         ...toolbarRelativeStyles(
           "top",
           theme,
-          (value) => value * stuckToolbars - 1 * stuckToolbars
+          /** if the sticky element is stuck within an element we use stuckToolbars=0 */
+          (value) => value * stuckToolbars - 1 * (stuckToolbars || 1)
         )
       }
     : {};

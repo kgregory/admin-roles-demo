@@ -3,14 +3,23 @@ import type { ListSubheaderProps } from "@material-ui/core/ListSubheader";
 import { makeStyles } from "@material-ui/core/styles";
 import stickyStyles from "../utils/stickyStyles";
 
+interface StickyListSubheaderProps extends ListSubheaderProps {
+  stuckToolbars?: number;
+}
+
 const useStyles = makeStyles((theme) => ({
-  sticky: {
-    ...stickyStyles(theme)
-  }
+  sticky: ({
+    stuckToolbars
+  }: Pick<StickyListSubheaderProps, "stuckToolbars">) => ({
+    ...stickyStyles(theme, { stuckToolbars })
+  })
 }));
 
-const StickyListSubheader = (props: ListSubheaderProps) => {
-  const classes = useStyles();
+const StickyListSubheader = ({
+  stuckToolbars,
+  ...props
+}: StickyListSubheaderProps) => {
+  const classes = useStyles({ stuckToolbars });
   return (
     <ListSubheader
       {...props}

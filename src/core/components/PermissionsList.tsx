@@ -17,10 +17,11 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       backgroundColor: theme.palette.background.paper
     },
-    gutters: ({ gutters }: { gutters: number }) => ({
+    gutters: ({ gutters }: Pick<PermissionsListProps, "gutters">) => ({
       paddingLeft: gutters != null ? theme.spacing(gutters) : undefined,
       paddingRight: gutters != null ? theme.spacing(gutters) : undefined
-    })
+    }),
+    chip: { marginLeft: theme.spacing(1) }
   })
 );
 
@@ -67,6 +68,7 @@ interface PermissionsListProps {
   showInherited?: boolean;
   subheader?: string;
   gutters?: number;
+  stuckToolbars?: number;
 }
 
 const PermissionsList = ({
@@ -76,7 +78,8 @@ const PermissionsList = ({
   permissions,
   showInherited = true,
   subheader,
-  gutters
+  gutters,
+  stuckToolbars
 }: PermissionsListProps) => {
   const classes = useStyles({ gutters });
   const permissionsMap = React.useMemo(
@@ -105,6 +108,7 @@ const PermissionsList = ({
             component="div"
             id={`invitation-details-roles`}
             classes={{ gutters: classes.gutters }}
+            stuckToolbars={stuckToolbars}
           >
             {subheader}
           </StickyListSubheader>
@@ -157,6 +161,7 @@ const PermissionsList = ({
                     color="secondary"
                     size="small"
                     label="Inherited"
+                    className={classes.chip}
                   />
                 ) : null}
               </ListItem>
