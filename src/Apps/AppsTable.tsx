@@ -9,119 +9,18 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
-import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined";
-import IndeterminateCheckBoxOutlinedIcon from "@material-ui/icons/IndeterminateCheckBoxOutlined";
-
-interface Data {
-  initials: string;
-  name: string;
-  storisUserId: string;
-  createdDate: string;
-  activeDate: string;
-  isActive: boolean;
-  isEnabledOnPlatform: boolean;
-}
-
-function createData(
-  initials: string,
-  name: string,
-  storisUserId: string,
-  createdDate: string,
-  activeDate: string,
-  isActive: boolean,
-  isEnabledOnPlatform: boolean
-): Data {
-  return {
-    initials,
-    name,
-    storisUserId,
-    createdDate,
-    activeDate,
-    isActive,
-    isEnabledOnPlatform
-  };
-}
-
-const rows = [
-  createData(
-    "DW",
-    "Data Warehouse",
-    "SRD",
-    "9/20/1995",
-    "9/1/2021",
-    true,
-    true
-  ),
-  createData("ES", "eSTORIS", "ZZZ", "8/23/2018", "7/15/2021", true, true),
-  createData(
-    "EC",
-    "eSTORIS Classic",
-    "SRD",
-    "8/16/2011",
-    "11/26/2015",
-    true,
-    true
-  ),
-  createData(
-    "MS",
-    "Mobile STORIS (the one that ran on pocket PC)",
-    "ZZZ",
-    "1/23/1989",
-    "11/23/2007",
-    false,
-    false
-  ),
-  createData("ER", "eRoam", "SED", "11/2/2013", "11/2/2013", false, false),
-  createData(
-    "HC",
-    "Tito's `Hello Customer` button",
-    "TR",
-    "11/2/2013",
-    "11/2/2013",
-    false,
-    true
-  )
-];
-
-function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
+import { apps } from "core/constants/data";
+import type { AppData } from "core/constants/data";
+import stableSort from "core/utils/stableSort";
+import getComparator from "core/utils/getComparator";
+import AppActiveIcon from "./AppActiveIcon";
 
 type Order = "asc" | "desc";
 
-function getComparator<Key extends keyof any>(
-  order: Order,
-  orderBy: Key
-): (
-  a: { [key in Key]: number | string },
-  b: { [key in Key]: number | string }
-) => number {
-  return order === "desc"
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-function stableSort<T>(array: T[], comparator: (a: T, b: T) => number) {
-  const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
-}
-
 interface HeadCell {
-  id: keyof Data;
+  id: keyof AppData;
   label: string;
   numeric: boolean;
   sortable: boolean;
@@ -175,7 +74,7 @@ interface EnhancedTableProps {
   numSelected: number;
   onRequestSort: (
     event: React.MouseEvent<unknown>,
-    property: keyof Data
+    property: keyof AppData
   ) => void;
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
   order: Order;
@@ -186,7 +85,7 @@ interface EnhancedTableProps {
 function EnhancedTableHead(props: EnhancedTableProps) {
   const classes = useTableHeadStyles();
   const { order, orderBy, onRequestSort } = props;
-  const createSortHandler = (property: keyof Data) => (
+  const createSortHandler = (property: keyof AppData) => (
     event: React.MouseEvent<unknown>
   ) => {
     onRequestSort(event, property);
@@ -281,14 +180,14 @@ const useTableStyles = makeStyles((theme: Theme) =>
 function EnhancedTable() {
   const classes = useTableStyles();
   const [order, setOrder] = React.useState<Order>("asc");
-  const [orderBy, setOrderBy] = React.useState<keyof Data>("name");
+  const [orderBy, setOrderBy] = React.useState<keyof AppData>("name");
   const [selected, setSelected] = React.useState<string[]>([]);
   const page = 0;
   const rowsPerPage = 6;
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
-    property: keyof Data
+    property: keyof AppData
   ) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -297,7 +196,7 @@ function EnhancedTable() {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
+      const newSelecteds = apps.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -309,7 +208,7 @@ function EnhancedTable() {
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
 
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    rowsPerPage - Math.min(rowsPerPage, apps.length - page * rowsPerPage);
 
   return (
     <div className={classes.root}>
@@ -327,33 +226,33 @@ function EnhancedTable() {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={apps.length}
             />
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(apps, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                .map((app, index) => {
+                  const isItemSelected = isSelected(app.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, app.name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={app.name}
                       selected={isItemSelected}
                     >
                       <TableCell component="th" id={labelId} scope="row">
                         <Avatar className={classes.avatar}>
-                          {row.initials}
+                          {app.initials}
                         </Avatar>
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row">
-                        {row.name}
-                        {!row.isEnabledOnPlatform ? (
+                        {app.name}
+                        {!app.isEnabledOnPlatform ? (
                           <Typography
                             variant="body2"
                             color="textSecondary"
@@ -363,24 +262,20 @@ function EnhancedTable() {
                           </Typography>
                         ) : null}
                       </TableCell>
-                      <TableCell>{row.storisUserId}</TableCell>
-                      <TableCell>{row.createdDate}</TableCell>
-                      <TableCell>{row.activeDate}</TableCell>
+                      <TableCell>{app.storisUserId}</TableCell>
+                      <TableCell>{app.createdDate}</TableCell>
+                      <TableCell>{app.activeDate}</TableCell>
                       <TableCell>
-                        {row.isEnabledOnPlatform && row.isActive ? (
-                          <CheckOutlinedIcon />
-                        ) : (
-                          (!row.isEnabledOnPlatform && (
-                            <IndeterminateCheckBoxOutlinedIcon />
-                          )) ||
-                          null
-                        )}
+                        <AppActiveIcon
+                          isEnabledOnPlatform={app.isEnabledOnPlatform}
+                          isActive={app.isActive}
+                        />
                       </TableCell>
                     </TableRow>
                   );
                 })}
               {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                <TableRow style={{ height: 53 * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
               )}

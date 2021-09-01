@@ -1,16 +1,22 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Hidden from "@material-ui/core/Hidden";
+import Zoom from "@material-ui/core/Zoom";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
 import AdminAppBar from "core/components/AdminAppBar";
 import toolbarRelativeStyles from "core/utils/toolbarRelativeStyles";
 import type { DemoView } from "core/types";
 import AppsTable from "./AppsTable";
+import AppsList from "./AppsList";
 
 const useStyles = makeStyles((theme) => ({
   // this is what our theme usually uses
   "@global": {
     body: {
-      background: "#fafafa"
+      background: "#fafafa",
+      margin: 0
     }
   },
   root: {
@@ -24,6 +30,14 @@ const useStyles = makeStyles((theme) => ({
     ),
     marginBottom: theme.spacing(3)
   },
+  listContent: {
+    ...toolbarRelativeStyles(
+      "marginTop",
+      theme,
+      (value) => (value as number) - 1
+    ),
+    marginBottom: theme.spacing(3)
+  },
   section: {
     "& > *": {
       marginBottom: theme.spacing(3)
@@ -31,6 +45,11 @@ const useStyles = makeStyles((theme) => ({
     "& > *:last-child": {
       marginBottom: theme.spacing(0)
     }
+  },
+  fab: {
+    position: "absolute",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2)
   }
 }));
 
@@ -43,9 +62,25 @@ const Apps = ({ onChangeView }: AppsProps) => {
   return (
     <div className={classes.root}>
       <AdminAppBar onChangeView={onChangeView}>Apps</AdminAppBar>
-      <Container className={classes.content}>
-        <AppsTable />
-      </Container>
+      <Hidden xsDown>
+        <Container className={classes.content}>
+          <AppsTable />
+        </Container>
+      </Hidden>
+      <Hidden smUp>
+        <div className={classes.listContent}>
+          <AppsList onClick={() => onChangeView("appdetails")} />
+        </div>
+      </Hidden>
+      <Zoom in>
+        <Fab
+          aria-label="Add App to Workspace"
+          className={classes.fab}
+          color="secondary"
+        >
+          <AddIcon />
+        </Fab>
+      </Zoom>
     </div>
   );
 };

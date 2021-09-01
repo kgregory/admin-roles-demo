@@ -114,3 +114,70 @@ export const userGroups = [
   { description: "Everyone except for Bob Quigley" },
   { description: "Bob Quigley and those like him" }
 ];
+
+export interface AppData {
+  initials: string;
+  name: string;
+  storisUserId: string;
+  createdDate: string;
+  activeDate: string;
+  isActive: boolean;
+  isEnabledOnPlatform: boolean;
+}
+
+export const apps: AppData[] = [
+  {
+    initials: "DW",
+    name: "Data Warehouse",
+    storisUserId: "SRD",
+    createdDate: "9/20/1995",
+    activeDate: "9/1/2021",
+    isActive: true,
+    isEnabledOnPlatform: true
+  },
+  {
+    initials: "ES",
+    name: "eSTORIS",
+    storisUserId: "ZZZ",
+    createdDate: "8/23/2018",
+    activeDate: "7/15/2021",
+    isActive: true,
+    isEnabledOnPlatform: true
+  },
+  {
+    initials: "EC",
+    name: "eSTORIS Classic",
+    storisUserId: "SRD",
+    createdDate: "8/16/2011",
+    activeDate: "11/26/2015",
+    isActive: true,
+    isEnabledOnPlatform: true
+  },
+  {
+    initials: "MS",
+    name: "Mobile STORIS (the one for pocket PC!)",
+    storisUserId: "ZZZ",
+    createdDate: "1/23/1989",
+    activeDate: "11/23/2007",
+    isActive: false,
+    isEnabledOnPlatform: false
+  },
+  {
+    initials: "ER",
+    name: "eRoam",
+    storisUserId: "SED",
+    createdDate: "11/2/2013",
+    activeDate: "11/2/2013",
+    isActive: false,
+    isEnabledOnPlatform: false
+  },
+  {
+    initials: "HC",
+    name: "Tito's `Hello Customer` button",
+    storisUserId: "TR",
+    createdDate: "11/2/2013",
+    activeDate: "11/2/2013",
+    isActive: false,
+    isEnabledOnPlatform: true
+  }
+];
