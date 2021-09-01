@@ -59,17 +59,18 @@ interface AppsProps {
 
 const Apps = ({ onChangeView }: AppsProps) => {
   const classes = useStyles();
+  const onClick = () => onChangeView("appdetails");
   return (
     <div className={classes.root}>
       <AdminAppBar onChangeView={onChangeView}>Apps</AdminAppBar>
       <Hidden xsDown>
         <Container className={classes.content}>
-          <AppsTable />
+          <AppsTable onClick={onClick} />
         </Container>
       </Hidden>
       <Hidden smUp>
         <div className={classes.listContent}>
-          <AppsList onClick={() => onChangeView("appdetails")} />
+          <AppsList onClick={onClick} />
         </div>
       </Hidden>
       <Zoom in>

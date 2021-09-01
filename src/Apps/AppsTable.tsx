@@ -69,7 +69,7 @@ const useTableHeadStyles = makeStyles(
   })
 );
 
-interface EnhancedTableProps {
+interface EnhancedTableHeadProps {
   numSelected: number;
   onRequestSort: (
     event: React.MouseEvent<unknown>,
@@ -81,7 +81,7 @@ interface EnhancedTableProps {
   rowCount: number;
 }
 
-function EnhancedTableHead(props: EnhancedTableProps) {
+function EnhancedTableHead(props: EnhancedTableHeadProps) {
   const classes = useTableHeadStyles();
   const { order, orderBy, onRequestSort } = props;
   const createSortHandler = (property: keyof AppData) => (
@@ -177,7 +177,11 @@ const useTableStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function EnhancedTable() {
+interface EnhancedTableProps {
+  onClick: () => void;
+}
+
+function EnhancedTable({ onClick }: EnhancedTableProps) {
   const classes = useTableStyles();
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<keyof AppData>("name");
@@ -203,7 +207,9 @@ function EnhancedTable() {
     setSelected([]);
   };
 
-  const handleClick = (event: React.MouseEvent<unknown>, name: string) => {};
+  const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
+    onClick();
+  };
 
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
 

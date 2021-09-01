@@ -15,22 +15,29 @@ interface CardButtonProps {
   label: string;
   icon: React.ReactNode;
   dialogText?: string;
+  onAffirmative?: () => void;
 }
 
-const CardButton = ({ label, icon, dialogText }: CardButtonProps) => {
+const CardButton = ({
+  label,
+  icon,
+  dialogText,
+  onAffirmative = () => {}
+}: CardButtonProps) => {
   const [loading, setLoading] = React.useState(false);
   const classes = useStyles();
   const confirmationDialog = useConfirmationDialog(() => {});
+
+  /** awful mode thing for demo purposes */
+  const isConfirmable = dialogText != null;
 
   const handleAffirmative = async () => {
     setLoading(true);
     await delay(2000);
     setLoading(false);
     confirmationDialog.onAffirmative();
+    onAffirmative();
   };
-
-  /** awful mode thing for demo purposes */
-  const isConfirmable = dialogText != null;
 
   return (
     <>
@@ -39,7 +46,9 @@ const CardButton = ({ label, icon, dialogText }: CardButtonProps) => {
         variant="outlined"
         startIcon={icon}
         className={classes.button}
-        onClick={() => (isConfirmable ? confirmationDialog.onOpen() : () => {})}
+        onClick={() =>
+          isConfirmable ? confirmationDialog.onOpen() : onAffirmative()
+        }
       >
         {label}
       </Button>
