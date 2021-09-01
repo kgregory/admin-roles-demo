@@ -172,7 +172,8 @@ const useTableStyles = makeStyles((theme: Theme) =>
     table: {
       minWidth: 750
     },
-    avatar: { background: theme.palette.secondary.main }
+    avatar: { background: theme.palette.secondary.main },
+    disabled: { opacity: theme.palette.action.disabledOpacity }
   })
 );
 
@@ -236,13 +237,20 @@ function EnhancedTable() {
 
                   return (
                     <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, app.name)}
+                      hover={app.isEnabledOnPlatform}
+                      onClick={
+                        app.isEnabledOnPlatform
+                          ? (event) => handleClick(event, app.name)
+                          : undefined
+                      }
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={app.name}
                       selected={isItemSelected}
+                      className={
+                        !app.isEnabledOnPlatform ? classes.disabled : undefined
+                      }
                     >
                       <TableCell component="th" id={labelId} scope="row">
                         <Avatar className={classes.avatar}>

@@ -59,7 +59,12 @@ const AppsList = ({ onClick }: AppsListProps) => {
                 dateDifference != null ? ` — ${dateDifference}` : "";
 
               return (
-                <ListItem key={app.name} button onClick={onClick}>
+                <ListItem
+                  key={app.name}
+                  button
+                  onClick={onClick}
+                  disabled={!app.isEnabledOnPlatform}
+                >
                   <ListItemAvatar>
                     <Avatar className={classes.avatar}>{app.initials}</Avatar>
                   </ListItemAvatar>
