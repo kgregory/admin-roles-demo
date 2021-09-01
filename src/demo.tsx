@@ -6,6 +6,7 @@ import RoleDetails from "./RoleDetails";
 import InvitationDetails from "./InvitationDetails";
 import AppDetails from "./AppDetails";
 import AddRole from "./AddRole";
+import Apps from "./Apps";
 
 interface DemoState {
   view: DemoView;
@@ -41,6 +42,8 @@ const View = ({ view, onChangeView }: ViewProps) => {
       return <InvitationDetails onChangeView={onChangeView} />;
     case "appdetails":
       return <AppDetails onChangeView={onChangeView} />;
+    case "apps":
+      return <Apps onChangeView={onChangeView} />;
     default:
       return <div>No, that's not permitted. You shouldn't be seeing this.</div>;
   }

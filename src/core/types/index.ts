@@ -3,7 +3,8 @@ export type DemoView =
   | "roledetails"
   | "invitationdetails"
   | "appdetails"
-  | "addrole";
+  | "addrole"
+  | "apps";
 
 export type DialogState =
   | "fetching"

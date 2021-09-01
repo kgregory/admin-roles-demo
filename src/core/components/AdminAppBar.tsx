@@ -99,6 +99,7 @@ const AdminAppBar = ({
             }
           >
             {[
+              { text: "Apps", view: "apps" },
               { text: "Add Role Dialog", view: "addrole" },
               { text: "App Details", view: "appdetails" },
               { text: "User Details", view: "userdetails" },
