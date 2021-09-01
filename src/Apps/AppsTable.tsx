@@ -15,7 +15,6 @@ import { apps } from "core/constants/data";
 import type { AppData } from "core/constants/data";
 import stableSort from "core/utils/stableSort";
 import getComparator from "core/utils/getComparator";
-import AppActiveIcon from "./AppActiveIcon";
 
 type Order = "asc" | "desc";
 
@@ -51,7 +50,7 @@ const headCells: HeadCell[] = [
     label: "Last Active",
     sortable: false
   },
-  { id: "isActive", numeric: false, label: "Active", sortable: false }
+  { id: "isActive", numeric: false, label: "Status", sortable: false }
 ];
 
 const useTableHeadStyles = makeStyles(
@@ -266,10 +265,9 @@ function EnhancedTable() {
                       <TableCell>{app.createdDate}</TableCell>
                       <TableCell>{app.activeDate}</TableCell>
                       <TableCell>
-                        <AppActiveIcon
-                          isEnabledOnPlatform={app.isEnabledOnPlatform}
-                          isActive={app.isActive}
-                        />
+                        {!app.isEnabledOnPlatform
+                          ? "Unavailable"
+                          : (app.isActive && "Active") || "Deactivated"}
                       </TableCell>
                     </TableRow>
                   );

@@ -14,7 +14,6 @@ import { apps } from "core/constants/data";
 import getDateTimeDifferenceText from "core/utils/getDateTimeDifferenceText";
 import stableSort from "core/utils/stableSort";
 import getComparator from "core/utils/getComparator";
-import AppActiveChip from "./AppActiveChip";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -72,10 +71,6 @@ const AppsList = ({ onClick }: AppsListProps) => {
                         : (app.createdDate != null && app.createdDate) ||
                           undefined
                     }
-                  />
-                  <AppActiveChip
-                    isEnabledOnPlatform={app.isEnabledOnPlatform}
-                    isActive={app.isActive}
                   />
                 </ListItem>
               );
