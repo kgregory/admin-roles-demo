@@ -7,6 +7,7 @@ import AdminAppBar from "core/components/AdminAppBar";
 import CardEditor from "core/components/CardEditor";
 import useDialog from "core/hooks/useDialog";
 import toolbarRelativeStyles from "core/utils/toolbarRelativeStyles";
+import type { DemoView } from "core/types";
 import RolesPermissionsCard from "./RolesPermissionsCard";
 import ContactCard from "./ContactCard";
 import DeactivateButton from "./DeactivateButton";
@@ -40,14 +41,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function UserDetails({ onChangeView }) {
+interface UserDetailsProps {
+  onChangeView: (view: DemoView) => void;
+}
+
+export default function UserDetails({ onChangeView }: UserDetailsProps) {
   const classes = useStyles();
   const userIdDialog = useDialog();
   const userState: "initial" | "loading" | "error" = "initial";
   const [user] = users;
   return (
     <div className={classes.root}>
-      <AdminAppBar onChangeView={onChangeView}>User Details</AdminAppBar>
+      <AdminAppBar child onChangeView={onChangeView}>
+        User Details
+      </AdminAppBar>
       <Container className={classes.content}>
         <Grid spacing={2} container className={classes.section}>
           <Grid item xs={12} md={4} className={classes.section}>

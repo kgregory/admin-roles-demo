@@ -46,7 +46,9 @@ const useDialogState = (dialogState: AddRoleProps["dialogState"]) =>
       disabled: dialogState === "loading",
       closeButtonDisabled: dialogState === "loading",
       confirmButtonDisabled:
-        dialogState === "loading" || dialogState === "fetching",
+        dialogState === "loading" ||
+        dialogState === "fetching" ||
+        dialogState === "fetchError",
       fetchedFieldFetching: dialogState === "fetching",
       fetchedFieldDisabled:
         dialogState === "loading" ||

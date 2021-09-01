@@ -56,7 +56,9 @@ export default function AppDetails({ onChangeView }: AppDetailsProps) {
   };
   return (
     <div className={classes.root}>
-      <AdminAppBar onChangeView={onChangeView}>App Details</AdminAppBar>
+      <AdminAppBar child onChangeView={onChangeView}>
+        App Details
+      </AdminAppBar>
       <Container className={classes.content}>
         <Grid spacing={2} container className={classes.section}>
           <Grid item xs={12} md={4} className={classes.section}>

@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import AdminAppBar from "core/components/AdminAppBar";
 import CardData from "core/components/CardData";
 import toolbarRelativeStyles from "core/utils/toolbarRelativeStyles";
-import { DemoView } from "core/types";
+import type { DemoView } from "core/types";
 import DeleteButton from "./DeleteButton";
 import DetailsCard from "./DetailsCard";
 import ResendButton from "./ResendButton";
@@ -54,7 +54,9 @@ export default function InvitationDetails({
   };
   return (
     <div className={classes.root}>
-      <AdminAppBar onChangeView={onChangeView}>Invitation Details</AdminAppBar>
+      <AdminAppBar child onChangeView={onChangeView}>
+        Invitation Details
+      </AdminAppBar>
       <Container className={classes.content}>
         <Grid spacing={2} container className={classes.section}>
           <Grid item xs={12} md={4} className={classes.section}>
@@ -67,7 +69,7 @@ export default function InvitationDetails({
             <DeleteButton />
           </Grid>
           <Grid item xs={12} md={8} className={classes.section}>
-            <RolesCard />
+            <RolesCard onRoleClick={() => onChangeView("roledetails")} />
           </Grid>
         </Grid>
       </Container>

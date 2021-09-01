@@ -14,6 +14,8 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import HomeIcon from "@material-ui/icons/Home";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import type { DemoView } from "core/types";
 
 const useAdminAppBarStyles = makeStyles((theme: Theme) =>
@@ -31,11 +33,16 @@ const useAdminAppBarStyles = makeStyles((theme: Theme) =>
 );
 
 interface AdminAppBarProps {
+  child?: boolean;
   children: React.ReactNode;
   onChangeView: (view: DemoView) => void;
 }
 
-const AdminAppBar = ({ children, onChangeView }: AdminAppBarProps) => {
+const AdminAppBar = ({
+  child = false,
+  children,
+  onChangeView
+}: AdminAppBarProps) => {
   const classes = useAdminAppBarStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -64,11 +71,14 @@ const AdminAppBar = ({ children, onChangeView }: AdminAppBarProps) => {
             aria-label="menu"
             onClick={toggleDrawer(true)}
           >
-            <MenuIcon />
+            {child ? <ArrowBackIcon /> : <MenuIcon />}
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             {children}
           </Typography>
+          <IconButton color="inherit" aria-label="Home">
+            <HomeIcon />
+          </IconButton>
           <IconButton edge="end" color="inherit" aria-label="overflow">
             <MoreVertIcon />
           </IconButton>
