@@ -1,5 +1,6 @@
 import React from "react";
 import createSvgIcon from "@material-ui/icons/utils/createSvgIcon";
+import PersonIcon from "@material-ui/icons/Person";
 import CardButton from "core/components/CardButton";
 
 const PersonOffIcon = createSvgIcon(
@@ -7,12 +8,20 @@ const PersonOffIcon = createSvgIcon(
   "PersonOff"
 );
 
-const DeactivateButton = () => (
-  <CardButton
-    dialogText="The user will be deactivated."
-    label="Deactivate"
-    icon={<PersonOffIcon />}
-  />
-);
+const DeactivateButton = () => {
+  const [active, setActive] = React.useState(true);
+  return (
+    <CardButton
+      dialogText={
+        active ? "The user will be deactivated." : "The user will be activated."
+      }
+      label={active ? "Deactivate" : "Activate"}
+      icon={active ? <PersonOffIcon /> : <PersonIcon />}
+      onAffirmative={() => {
+        setActive(!active);
+      }}
+    />
+  );
+};
 
 export default DeactivateButton;
