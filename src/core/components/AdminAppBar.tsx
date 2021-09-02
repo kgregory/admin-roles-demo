@@ -10,9 +10,8 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
+import StarIcon from "@material-ui/icons/Star";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import HomeIcon from "@material-ui/icons/Home";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
@@ -31,6 +30,15 @@ const useAdminAppBarStyles = makeStyles((theme: Theme) =>
     }
   })
 );
+
+const views: { text: string; view: DemoView }[] = [
+  { text: "Apps", view: "apps" },
+  { text: "Add Role Dialog", view: "addrole" },
+  { text: "App Details", view: "appdetails" },
+  { text: "User Details", view: "userdetails" },
+  { text: "Invitation Details", view: "invitationdetails" },
+  { text: "Role Details", view: "roledetails" }
+];
 
 interface AdminAppBarProps {
   child?: boolean;
@@ -98,17 +106,10 @@ const AdminAppBar = ({
               </ListSubheader>
             }
           >
-            {[
-              { text: "Apps", view: "apps" },
-              { text: "Add Role Dialog", view: "addrole" },
-              { text: "App Details", view: "appdetails" },
-              { text: "User Details", view: "userdetails" },
-              { text: "Invitation Details", view: "invitationdetails" },
-              { text: "Role Details", view: "roledetails" }
-            ].map(({ text, view }, index) => (
+            {views.map(({ text, view }, index) => (
               <ListItem button key={text} onClick={() => onChangeView(view)}>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  <StarIcon />
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
