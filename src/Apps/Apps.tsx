@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
       theme,
       (value) => (value as number) + theme.spacing(3)
     ),
-    marginBottom: theme.spacing(3)
+    marginBottom: theme.spacing(13)
   },
   listContent: {
     ...toolbarRelativeStyles(
@@ -47,9 +47,9 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   fab: {
-    position: "absolute",
-    bottom: theme.spacing(2),
-    right: theme.spacing(2)
+    position: "fixed",
+    bottom: theme.spacing(3),
+    right: theme.spacing(3)
   }
 }));
 
@@ -61,18 +61,20 @@ const Apps = ({ onChangeView }: AppsProps) => {
   const classes = useStyles();
   const onClick = () => onChangeView("appdetails");
   return (
-    <div className={classes.root}>
-      <AdminAppBar onChangeView={onChangeView}>Apps</AdminAppBar>
-      <Hidden xsDown>
-        <Container className={classes.content}>
-          <AppsTable onClick={onClick} />
-        </Container>
-      </Hidden>
-      <Hidden smUp>
-        <div className={classes.listContent}>
-          <AppsList onClick={onClick} />
-        </div>
-      </Hidden>
+    <>
+      <div className={classes.root}>
+        <AdminAppBar onChangeView={onChangeView}>Apps</AdminAppBar>
+        <Hidden xsDown>
+          <Container className={classes.content}>
+            <AppsTable onClick={onClick} />
+          </Container>
+        </Hidden>
+        <Hidden smUp>
+          <div className={classes.listContent}>
+            <AppsList onClick={onClick} />
+          </div>
+        </Hidden>
+      </div>
       <Zoom in>
         <Fab
           aria-label="Add App to Workspace"
@@ -82,7 +84,7 @@ const Apps = ({ onChangeView }: AppsProps) => {
           <AddIcon />
         </Fab>
       </Zoom>
-    </div>
+    </>
   );
 };
 
